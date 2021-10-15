@@ -4,9 +4,9 @@ const initState = {
 }
 
 
-export const NewPasswordReducer = (state = initState, action: NewPasswordReducerACType)=> {
+export const NewPasswordReducer = (state = initState, action: NewPasswordACType)=> {
     switch (action.type) {
-        case 'SHOW-LOGIN': {
+        case 'SHOW-NEW-PASSWORD': {
             return {
                 ...state,
                 newPassword: action.newPassword
@@ -17,7 +17,7 @@ export const NewPasswordReducer = (state = initState, action: NewPasswordReducer
     }
 }
 
-    type NewPasswordReducerACType = ReturnType<typeof NewPasswordReducerAC>
+    type NewPasswordACType = ReturnType<typeof NewPasswordAC>
 
-    export const NewPasswordReducerAC = (newPassword: string) => (
-        {type: 'SHOW-LOGIN', newPassword } as const )
+    export const NewPasswordAC = (newPassword: string) => (
+        {type: 'SHOW-NEW-PASSWORD', newPassword } as const )

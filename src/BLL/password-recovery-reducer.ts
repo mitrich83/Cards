@@ -1,12 +1,15 @@
 
+const initState = {
+    passwordRecovery: false
+}
 
-export const PasswordRecoveryReducer = () => {
+export const PasswordRecoveryReducer = (state = initState, action: PasswordRecoverACType) => {
     {
         switch (action.type) {
-            case 'SHOW-LOGIN': {
+            case 'SHOW-PASSWORD-RECOVERY': {
                 return {
                     ...state,
-                    newPassword: action.newPassword
+                    passwordRecovery: action.passwordRecovery
                 }
             }
             default:
@@ -15,3 +18,7 @@ export const PasswordRecoveryReducer = () => {
     }
 }
 
+type PasswordRecoverACType = ReturnType<typeof passwordRecoverAC>
+
+export const passwordRecoverAC = (passwordRecovery:boolean) => (
+    {type: 'SHOW-PASSWORD-RECOVERY', passwordRecovery } as const )
