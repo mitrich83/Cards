@@ -2,12 +2,14 @@ import React from 'react';
 import './App.css';
 import {Header} from './UI/components/Header';
 import {Main} from './UI/components/Main';
+import Navbar from './UI/components/Navbar';
+import {Routes} from './UI/routes/Routes';
 
 const App = () => {
     return (
         <div className="App">
-            <Header/>
-            <Main/>
+            <Navbar/>
+            <Routes/>
         </div>
     );
 }
