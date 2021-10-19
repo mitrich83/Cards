@@ -1,7 +1,7 @@
 import React from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 import {Login} from '../components/pages/Login/Login';
-import {Registration} from '../components/pages/Registration/Registration';
+import {SignUp} from '../components/pages/SignUp/SignUp';
 import {Profile} from '../components/pages/Profile/Profile';
 import {PasswordRecovery} from '../components/pages/PasswordRecovery/PasswordRecovery';
 import {NewPassword} from '../components/pages/NewPassword/NewPassword';
@@ -24,7 +24,7 @@ export const Routes = () => {
             <Switch>
                 <Route path={'/'} exact render={() => <Redirect to={PATH.PROFILE}/>}/>
                 <Route path={PATH.LOGIN} render={() => <Login/>}/>
-                <Route path={PATH.REGISTRATION} render={() => <Registration/>}/>
+                <Route path={PATH.REGISTRATION} render={() => <SignUp/>}/>
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route path={PATH.PASSWORD_RECOVERY} render={() => <PasswordRecovery/>}/>
                 <Route path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
