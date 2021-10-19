@@ -18,7 +18,6 @@ export const PATH = {
     TEST_PAGE:'/test'
 }
 
-
 export const Routes = () => {
     return (
         <div>
