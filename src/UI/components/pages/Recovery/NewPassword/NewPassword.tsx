@@ -1,0 +1,54 @@
+import React, {ChangeEvent, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {setNewPasswordTC} from '../../../../../BLL/password-recovery-reducer';
+import SuperButton from '../../../common/Button/SuperButton';
+import {useParams} from 'react-router-dom';
+import s from './NewPassword.module.css'
+
+
+export const NewPassword = () => {
+    const dispatch = useDispatch()
+    const [password, setPassword] = useState<string>('')
+
+    const {token} = useParams<any>()
+    console.log(token)
+
+    const createNewPasswordHandler = (e:ChangeEvent<HTMLInputElement>)=> {
+        setPassword(e.currentTarget.value)
+    }
+
+    const setNewPasswordHandler = ()=> {
+        if(!password) return
+        dispatch(setNewPasswordTC(password, token ))
+    }
+
+/*    if (password){
+        return <Redirect to={PATH.LOGIN} />
+    }*/
+
+    return (
+        <div className={s.page}>
+            <div className={s.container}>
+                <div>
+                    <h2 className={s.title}>Create new password</h2>
+                </div>
+                <div className={s.input}>
+                    <input
+                        value={password}
+                        onChange={createNewPasswordHandler}
+                    />
+                </div>
+                <div className={s.placeholder}>
+                    <span> Create new password and we will send you further instructions to email</span>
+                </div>
+                <div className={s.button}>
+                    <SuperButton
+                        onClick={setNewPasswordHandler}
+                    >Create new password
+                    </SuperButton>
+                </div>
+
+            </div>
+        </div>
+    )
+}

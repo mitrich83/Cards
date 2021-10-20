@@ -83,9 +83,9 @@ export const SignUp = () => {
             setValues(values => ({...values, confirm: true, disabled: false}));
         }
     }
-    if (isLogged) {
+/*    if (isLogged) {
         return <Redirect to={PATH.PROFILE}/>
-    }
+    }*/
     return (
         <div>
             {loading === 'loading' ? <Box sx={{

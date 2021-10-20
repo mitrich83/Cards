@@ -1,16 +1,25 @@
+import {Dispatch} from 'redux';
+import {setAppStatusAC} from './app-reducer';
+import {loading} from './login-reducer';
+import {recoveryApi} from '../DAL/recovery-api';
 
 const initState = {
-    passwordRecovery: false
+    errorRecovery: '',
+    errorNewPassword: '',
+    newPassword: false
 }
 
-export const PasswordRecoveryReducer = (state = initState, action: PasswordRecoverACType) => {
+export const PasswordRecoveryReducer = (state = initState, action: RecoveryActionsType) => {
     {
         switch (action.type) {
-            case 'SHOW-PASSWORD-RECOVERY': {
-                return {
-                    ...state,
-                    passwordRecovery: action.passwordRecovery
-                }
+            case 'FORGOT/ERROR-RECOVERY': {
+                return {...state, errorRecovery: action.error}
+            }
+            case 'FORGOT/SET-NEW-PASSWORD': {
+                return {...state, newPassword: action.newPassword}
+            }
+            case 'FORGOT/ERROR-NEW-PASSWORD': {
+                return {...state, errorNewPassword: action.errorNewPassword}
             }
             default:
                 return state
@@ -18,7 +27,55 @@ export const PasswordRecoveryReducer = (state = initState, action: PasswordRecov
     }
 }
 
-type PasswordRecoverACType = ReturnType<typeof passwordRecoverAC>
+// types
+type RecoveryActionsType =
+    PasswordRecoverACType
+    | ErrorPasswordRecoverACType
+    | ErrorNewPasswordACType
 
-export const passwordRecoverAC = (passwordRecovery:boolean) => (
-    {type: 'SHOW-PASSWORD-RECOVERY', passwordRecovery } as const )
+type PasswordRecoverACType = ReturnType<typeof setNewPasswordAC>
+type ErrorPasswordRecoverACType = ReturnType<typeof errorPasswordRecoverAC>
+type ErrorNewPasswordACType = ReturnType<typeof errorNewPasswordAC>
+
+
+// actions
+export const setNewPasswordAC = (newPassword: boolean) => ({
+    type: 'FORGOT/SET-NEW-PASSWORD', newPassword } as const)
+export const errorPasswordRecoverAC = (error: string) => ({type: 'FORGOT/ERROR-RECOVERY', error} as const)
+export const errorNewPasswordAC = (errorNewPassword: string) => ({
+    type: 'FORGOT/ERROR-NEW-PASSWORD',
+    errorNewPassword
+} as const)
+
+// thunks
+export const passwordRecoverTC = (email: string, from:string,message:any) => (dispatch:Dispatch) =>{
+    debugger
+    dispatch(setAppStatusAC('loading'))
+    recoveryApi.recoveryPassword(email, from, message)
+        .then((res) =>{
+            debugger
+            console.log(res)
+            dispatch(setAppStatusAC('succeeded'))
+            dispatch(loading(true))
+        })
+        .catch((err)=>{
+            debugger
+            console.log({...err})
+            dispatch(errorPasswordRecoverAC(err.response.data.error))
+            dispatch(setAppStatusAC('succeeded'))
+        })
+}
+
+export const setNewPasswordTC = (password:string,resetPasswordToken:string) => (dispatch:Dispatch)=>{
+    dispatch(setAppStatusAC('loading'))
+    recoveryApi.setNewPassword(password,resetPasswordToken)
+        .then((res)=>{
+            dispatch(setAppStatusAC('succeeded'))
+            dispatch(setNewPasswordAC(true))
+        })
+        .catch((err) =>{
+            console.log({...err})
+            dispatch(errorNewPasswordAC(err.response.data.error))
+            dispatch(setAppStatusAC('succeeded'))
+        })
+}

@@ -15,9 +15,9 @@ export const Profile = () => {
         dispatch(logoutTC())
     }
 
-    if(!isLogin){
+/*    if(!isLogin){
        return <Redirect to={PATH.LOGIN}/>
-    }
+    }*/
     return (
         <div>
             <div>

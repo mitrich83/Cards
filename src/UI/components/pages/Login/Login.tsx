@@ -47,9 +47,9 @@ export const Login = () => {
     }
 
 
-    if (isLogin){
+/*    if (isLogin){
         return <Redirect to={PATH.PROFILE}/>
-    }
+    }*/
 
 
     return (

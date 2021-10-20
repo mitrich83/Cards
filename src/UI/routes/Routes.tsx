@@ -3,10 +3,11 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 import {Login} from '../components/pages/Login/Login';
 import {SignUp} from '../components/pages/SignUp/SignUp';
 import {Profile} from '../components/pages/Profile/Profile';
-import {PasswordRecovery} from '../components/pages/PasswordRecovery/PasswordRecovery';
-import {NewPassword} from '../components/pages/NewPassword/NewPassword';
+import {PasswordRecovery} from '../components/pages/Recovery/PasswordRecovery/PasswordRecovery';
+import {NewPassword} from '../components/pages/Recovery/NewPassword/NewPassword';
 import {Test} from '../components/pages/Test/Test';
 import {Error404} from '../components/pages/Error404/Error404';
+import {Notification} from '../components/pages/Recovery/Notification/Notification';
 
 
 export const PATH = {
@@ -14,7 +15,8 @@ export const PATH = {
     REGISTRATION: '/registration',
     PROFILE: '/profile',
     PASSWORD_RECOVERY:'/password-recovery',
-    NEW_PASSWORD:'/new-password,',
+    NOTIFICATION:'/notification',
+    NEW_PASSWORD:'/set-new-password',
     TEST_PAGE:'/test'
 }
 
@@ -27,7 +29,8 @@ export const Routes = () => {
                 <Route path={PATH.REGISTRATION} render={() => <SignUp/>}/>
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route path={PATH.PASSWORD_RECOVERY} render={() => <PasswordRecovery/>}/>
-                <Route path={PATH.NEW_PASSWORD} render={() => <NewPassword/>}/>
+                <Route path={PATH.NOTIFICATION} render={() => <Notification/>}/>
+                <Route path={PATH.NEW_PASSWORD + '$token$'} render={() => <NewPassword/>}/>
                 <Route path={PATH.TEST_PAGE} render={() => <Test/>}/>
 
                 <Route render={() => <Error404/>}/>
