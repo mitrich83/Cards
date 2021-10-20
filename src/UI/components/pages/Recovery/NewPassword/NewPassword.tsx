@@ -20,12 +20,8 @@ export const NewPassword = () => {
     const setNewPasswordHandler = ()=> {
         if(!password) return
         dispatch(setNewPasswordTC(password, token ))
-        if (password){
         return <Redirect to={PATH.LOGIN} />
     }
-    }
-
-
 
     return (
         <div className={s.page}>

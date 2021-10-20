@@ -18,7 +18,7 @@ export const PasswordRecovery = () => {
 
     const message = `<div>
 						вы отправили запрос на восстановления пароля, для продожения перейдите по ссылке:
-						<a href='http://localhost:3000/Cards#/set-new-password/$token$'>link
+						<a href='http://localhost:3000/Cards#/new-password/$token$'>link
 						</a>
 						если это были на Вы - то ничего не делайте
 					</div>`

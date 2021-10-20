@@ -13,7 +13,7 @@ export const Notification = ()=> {
                 <div className={s.email}>
                     <img src={email} alt="send"/></div>
                 <div className={s.placeholder}>
-                    <span>We’ve sent an Email with instructions to example@mail.com</span>
+                    <span>We’ve sent an Email with instructions to dmitry.malykhin@mail.ru</span>
                 </div>
 
             </div>

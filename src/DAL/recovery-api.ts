@@ -11,7 +11,7 @@ export const recoveryApi = {
     },
     setNewPassword(newPassword:string,
                    resetPasswordToken: string){
-        return instance.post<{ password: string,resetPasswordToken:string }, AxiosResponse<ResponseType>>('auth/new-password', {newPassword, resetPasswordToken})
+        return instance.post<{ password: string,resetPasswordToken:string }, AxiosResponse<ResponseType>>('auth/set-new-password', {newPassword, resetPasswordToken})
     }
 }
 

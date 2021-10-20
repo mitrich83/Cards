@@ -16,7 +16,7 @@ export const PATH = {
     PROFILE: '/profile',
     PASSWORD_RECOVERY:'/password-recovery',
     NOTIFICATION:'/notification',
-    NEW_PASSWORD:'/set-new-password',
+    NEW_PASSWORD:'/new-password',
     TEST_PAGE:'/test'
 }
 
@@ -30,7 +30,7 @@ export const Routes = () => {
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
                 <Route path={PATH.PASSWORD_RECOVERY} render={() => <PasswordRecovery/>}/>
                 <Route path={PATH.NOTIFICATION} render={() => <Notification/>}/>
-                <Route exact path={PATH.NEW_PASSWORD + '/:token' } render={() => <NewPassword/>}/>
+                <Route path={PATH.NEW_PASSWORD + '/:token' } render={() => <NewPassword/>}/>
                 <Route path={PATH.TEST_PAGE} render={() => <Test/>}/>
 
                 <Route render={() => <Error404/>}/>
