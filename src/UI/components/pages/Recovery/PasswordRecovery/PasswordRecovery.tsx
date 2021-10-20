@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {passwordRecoverTC} from '../../../../../BLL/password-recovery-reducer';
 import SuperButton from '../../../common/Button/SuperButton';
 import s from './PasswordRecovery.module.css'
@@ -10,7 +10,6 @@ import {PATH} from '../../../../routes/Routes';
 export const PasswordRecovery = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState<string>('')
-
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value);
     };
@@ -24,9 +23,8 @@ export const PasswordRecovery = () => {
 						если это были на Вы - то ничего не делайте
 					</div>`
 
-    const sendEmailHandler = () => {
-        dispatch(passwordRecoverTC(email, from, message))
-        return <Redirect to={PATH.NOTIFICATION} />
+    const sendEmailHandler =  () => {
+         dispatch (passwordRecoverTC(email, from, message))
     }
 
     return (
@@ -41,6 +39,7 @@ export const PasswordRecovery = () => {
                         placeholder={'Enter email'}
                         onChange={onChangeHandler}
                     />
+
                 </div>
                 <div className={s.placeholder}>
                     <span> Enter your email address and we will send you further instructions</span>

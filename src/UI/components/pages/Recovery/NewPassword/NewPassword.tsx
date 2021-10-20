@@ -2,16 +2,16 @@ import React, {ChangeEvent, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {setNewPasswordTC} from '../../../../../BLL/password-recovery-reducer';
 import SuperButton from '../../../common/Button/SuperButton';
-import {useParams} from 'react-router-dom';
+import {Redirect, useParams} from 'react-router-dom';
 import s from './NewPassword.module.css'
+import {PATH} from '../../../../routes/Routes';
 
 
 export const NewPassword = () => {
     const dispatch = useDispatch()
     const [password, setPassword] = useState<string>('')
 
-    const {token} = useParams<any>()
-    console.log(token)
+    const { token } = useParams<{token: string}>();
 
     const createNewPasswordHandler = (e:ChangeEvent<HTMLInputElement>)=> {
         setPassword(e.currentTarget.value)
@@ -20,11 +20,12 @@ export const NewPassword = () => {
     const setNewPasswordHandler = ()=> {
         if(!password) return
         dispatch(setNewPasswordTC(password, token ))
+        if (password){
+        return <Redirect to={PATH.LOGIN} />
+    }
     }
 
-/*    if (password){
-        return <Redirect to={PATH.LOGIN} />
-    }*/
+
 
     return (
         <div className={s.page}>

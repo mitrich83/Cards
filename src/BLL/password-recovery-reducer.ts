@@ -2,6 +2,9 @@ import {Dispatch} from 'redux';
 import {setAppStatusAC} from './app-reducer';
 import {loading} from './login-reducer';
 import {recoveryApi} from '../DAL/recovery-api';
+import {PATH} from '../UI/routes/Routes';
+import {Redirect} from 'react-router-dom';
+import React from 'react';
 
 const initState = {
     errorRecovery: '',
@@ -53,14 +56,10 @@ export const passwordRecoverTC = (email: string, from:string,message:any) => (di
     dispatch(setAppStatusAC('loading'))
     recoveryApi.recoveryPassword(email, from, message)
         .then((res) =>{
-            debugger
-            console.log(res)
             dispatch(setAppStatusAC('succeeded'))
             dispatch(loading(true))
         })
         .catch((err)=>{
-            debugger
-            console.log({...err})
             dispatch(errorPasswordRecoverAC(err.response.data.error))
             dispatch(setAppStatusAC('succeeded'))
         })
